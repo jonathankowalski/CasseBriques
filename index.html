@@ -4,10 +4,25 @@
         <title>Casse Brique</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script type="text/javascript" src="js/class/ball.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var cvsEl = document.getElementById("Scene");
+                context2d = cvsEl.getContext('2d')
+                Scene = $("#Scene")
+                playHeight = Scene.height()
+                playWidth = Scene.width()
+                startAngle = 5*Math.PI/4
+                ballX = 100; ballY = 100;             
+                return setInterval(main, 10)
+            });
+        </script>
     </head>
     <body>
-        <canvas id="Scene" width="640" height="480">
+        <canvas id="Scene" width="640" height="250">
             Votre navigateur n'est pas compatible
         </canvas>
+        <input type="button" onclick="main()" value="Next Step"/>
     </body>
 </html>
