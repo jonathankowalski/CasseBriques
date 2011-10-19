@@ -6,6 +6,7 @@ function ball(context, x, y, angle){
     this.context = context;
     this.x = x;
     this.y = y;
+    this.vitesse = 4;
     this.angle = angle;
     this.draw = function(){
         this.context.beginPath();
@@ -19,17 +20,13 @@ function ball(context, x, y, angle){
     }
     
     this.inverseAngleX = function(angle){
-        if(angle < Math.PI/2 || angle > Math.Pi*3/2){
-            newAngle = angle+Math.PI*3/2;
-        } else {
-            newAngle = angle+Math.PI/2;
-        }        
+        newAngle = Math.PI - angle
         return newAngle
     }
     
     this.getNextX = function(x){
-        newX = x + Math.cos(this.angle)*2;
-        if(newX < 0 || newX > playWidth){
+        newX = x + Math.cos(this.angle)*this.vitesse;
+        if(newX < 0 || newX > playWidth){            
             this.angle = this.inverseAngleX(this.angle);
             return this.getNextX(x);
         } else {
@@ -38,7 +35,7 @@ function ball(context, x, y, angle){
     }
     
     this.getNextY = function(y){
-        newY = y + Math.sin(this.angle)*2;
+        newY = y + Math.sin(this.angle)*this.vitesse;
         if(newY < 0 || newY > playHeight){
             this.angle = this.inverseAngleY(this.angle);
             return this.getNextY(y);
