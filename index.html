@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
         <script type="text/javascript" src="js/class/ball.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="js/class/raquette.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
                 var cvsEl = document.getElementById("Scene");
@@ -13,14 +13,33 @@
                 Scene = $("#Scene")
                 playHeight = Scene.height()
                 playWidth = Scene.width()
-                startAngle = 5*Math.PI/4
-                ballX = 100; ballY = 100;             
+                startAngle = 7*Math.PI/4
+                ballX = 10; ballY = 250;  
+                raqX = 200;
                 return setInterval(main, 10)
             });
+            
+            function main(){ 
+                //Balle
+                var myBall = new ball(context2d,ballX,ballY, startAngle)
+                ballX = myBall.getNextX(ballX);
+                ballY = myBall.getNextY(ballY);
+                startAngle = myBall.angle    
+
+                //Raquette
+                var myRaq = new raquette(context2d, raqX)
+                clear();
+                myBall.draw()
+                myRaq.draw()
+            }
+
+            function clear(){
+                context2d.clearRect(0,0,800,800)
+            }
         </script>
     </head>
     <body>
-        <canvas id="Scene" width="640" height="250">
+        <canvas id="Scene" width="640" height="300" style="border:1px solid #000">
             Votre navigateur n'est pas compatible
         </canvas>
         <input type="button" onclick="main()" value="Next Step"/>
