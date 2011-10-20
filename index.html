@@ -24,13 +24,13 @@
             
             function main(){ 
                 //Balle
-                var myBall = new ball(context2d,ballX,ballY, startAngle)
+                var myBall = new Ball(context2d,ballX,ballY, startAngle)
                 ballX = myBall.getNextX(ballX);
                 ballY = myBall.getNextY(ballY);
                 startAngle = myBall.angle    
 
                 //Raquette
-                var myRaq = new raquette(context2d)
+                var myRaq = new Raquette(context2d)
                 myRaq.changeX(raqX)
                 clear();
                 myBall.draw()
