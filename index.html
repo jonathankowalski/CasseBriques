@@ -16,6 +16,9 @@
                 startAngle = 7*Math.PI/4
                 ballX = 10; ballY = 250;  
                 raqX = 200;
+                $("#Scene").mousemove(function(e){
+                    raqX = e.pageX
+                })
                 return setInterval(main, 10)
             });
             
@@ -27,7 +30,8 @@
                 startAngle = myBall.angle    
 
                 //Raquette
-                var myRaq = new raquette(context2d, raqX)
+                var myRaq = new raquette(context2d)
+                myRaq.changeX(raqX)
                 clear();
                 myBall.draw()
                 myRaq.draw()
@@ -42,6 +46,5 @@
         <canvas id="Scene" width="640" height="300" style="border:1px solid #000">
             Votre navigateur n'est pas compatible
         </canvas>
-        <input type="button" onclick="main()" value="Next Step"/>
     </body>
 </html>
