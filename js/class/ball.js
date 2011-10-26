@@ -7,12 +7,13 @@ function Ball(context, x, y, angle){
     this.x = x;
     this.y = y;
     this.vitesse = 4;
-    this.angle = angle;
-    this.draw = function(){
-        this.context.beginPath();
-        this.context.arc(x,y,5,0,Math.PI*2,true)
-        this.context.fill()
-    }
+    this.angle = angle;    
+}
+
+Ball.prototype.draw = function(){
+    this.context.beginPath();
+    this.context.arc(this.x,this.y,5,0,Math.PI*2,true)
+    this.context.fill()
 }
     
 Ball.prototype.inverseAngleY = function(angle){
