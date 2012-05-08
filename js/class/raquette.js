@@ -7,8 +7,6 @@ function Raquette(game){
     this.width = 60; this.height = 10;
     this.y = this.game.height-this.height-10;
     this.x = (this.game.width/2)-(this.width/2);
-	this.game.context.fillRect(this.x, this.y, this.width, this.height);
-	alert(this.x+', '+this.y);
 	this.draw();
 	$(game.canvas).mousemove(this.move.bind(this))
 }

@@ -20,7 +20,17 @@ function Game(parent){
 		this.context = this.canvas.getContext('2d');
 		this.raq = new Raquette(this);
 		this.ball = new Ball(this);
-		this.timer=setTimeout(this.draw.bind(this), 20);
+		var bHeight=10, bWidth=30, bMargin=1, bXDecal=Math.floor((this.width%(bWidth+bMargin))/2), bYDecal=Math.floor(((this.height/2)%(bHeight+bMargin))/2);
+		this.bricks=new Array();
+		for(var i=0, j=Math.floor(this.width/(bWidth+bMargin)); i<j; i++)
+			{
+			//this.bricks[i]=array(); Could improve hit test by checking lines hit first
+			for(var k=0, l=Math.floor((this.height/2)/(bHeight+bMargin)); k<l; k++)
+				{
+				this.bricks.push(new Brick(this,bXDecal+i*bWidth+bMargin*(i-1),bYDecal+k*bHeight+bMargin*(k-1),bWidth,bHeight));
+				}
+			}
+		this.timer=setTimeout(this.draw.bind(this), 5);
 		}
 	else
 		{
