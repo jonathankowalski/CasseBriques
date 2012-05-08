@@ -4,47 +4,16 @@
         <title>Casse Brique</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script type="text/javascript" src="js/class/game.js"></script>
         <script type="text/javascript" src="js/class/ball.js"></script>
         <script type="text/javascript" src="js/class/raquette.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                var cvsEl = document.getElementById("Scene");
-                context2d = cvsEl.getContext('2d')
-                Scene = $("#Scene")
-                playHeight = Scene.height()
-                playWidth = Scene.width()
-                startAngle = 7*Math.PI/4
-                ballX = 10; ballY = 250;  
-                raqX = 200;
-                $("#Scene").mousemove(function(e){
-                    raqX = e.pageX
-                })
-                return setInterval(main, 10)
+                new Game(document.getElementById("Scene"));
             });
-            
-            function main(){ 
-                //Balle
-                var myBall = new Ball(context2d,ballX,ballY, startAngle)
-                ballX = myBall.getNextX(ballX);
-                ballY = myBall.getNextY(ballY);
-                startAngle = myBall.angle    
-
-                //Raquette
-                var myRaq = new Raquette(context2d)
-                myRaq.changeX(raqX)
-                clear();
-                myBall.draw()
-                myRaq.draw()
-            }
-
-            function clear(){
-                context2d.clearRect(0,0,800,800)
-            }
         </script>
     </head>
     <body>
-        <canvas id="Scene" width="640" height="300" style="border:1px solid #000">
-            Votre navigateur n'est pas compatible
-        </canvas>
+		<div id="Scene" style="width:640px; height:480px;"><p>Chargement...</p></div>
     </body>
 </html>
