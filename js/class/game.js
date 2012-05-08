@@ -30,10 +30,12 @@ function Game(parent){
 
 Game.prototype.loose = function() {
 	clearInterval(this.timer);
+	this.timer=0;
 }
 
 Game.prototype.draw = function() {
 	this.ball.move();
 	this.ball.draw();
-	this.timer=setTimeout(this.draw.bind(this), 20);
+	if(this.timer)
+		this.timer=setTimeout(this.draw.bind(this), 20);
 }
