@@ -8,8 +8,7 @@ function Ball(game){
     this.x =(this.game.width/2)-(this.r/2);
     this.y = this.game.height-this.game.raq.height-(this.r*2)-10;
     this.vitesse = 0;
-    //this.angle = 7*Math.PI/4;
-    this.angle = 6*Math.PI/4;
+    this.angle = 13*Math.PI/8;
 	$(game.canvas).click(this.start.bind(this))
 	this.draw();
 }

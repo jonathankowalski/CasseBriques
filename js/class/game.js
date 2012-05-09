@@ -20,14 +20,17 @@ function Game(parent){
 		this.context = this.canvas.getContext('2d');
 		this.raq = new Raquette(this);
 		this.ball = new Ball(this);
-		var bHeight=10, bWidth=30, bMargin=1, bXDecal=Math.floor((this.width%(bWidth+bMargin))/2), bYDecal=Math.floor(((this.height/2)%(bHeight+bMargin))/2);
+		var bHeight=20, bWidth=60, bMargin=1,
+			bXDecal=Math.floor((this.width%(bWidth+bMargin))/2),
+			bYDecal=Math.floor(((this.height/2)%(bHeight+bMargin))/2),
+			gYMargin=30, gXMargin=30;
 		this.bricks=new Array();
-		for(var i=0, j=Math.floor(this.width/(bWidth+bMargin)); i<j; i++)
+		for(var i=0, j=Math.floor((this.width-(gXMargin*2))/(bWidth+bMargin)); i<j; i++)
 			{
 			//this.bricks[i]=array(); Could improve hit test by checking lines hit first
 			for(var k=0, l=Math.floor((this.height/2)/(bHeight+bMargin)); k<l; k++)
 				{
-				this.bricks.push(new Brick(this,bXDecal+i*bWidth+bMargin*(i-1),bYDecal+k*bHeight+bMargin*(k-1),bWidth,bHeight));
+				this.bricks.push(new Brick(this,gXMargin+bXDecal+i*bWidth+bMargin*(i-1),gYMargin+bYDecal+k*bHeight+bMargin*(k-1),bWidth,bHeight));
 				}
 			}
 		this.timer=setTimeout(this.draw.bind(this), 5);
