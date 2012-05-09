@@ -32,7 +32,10 @@ Ball.prototype.move = function(angle){
 	var newX = this.getNextX();
 	var newY = this.getNextY(); 
 	if(newY >this.game.height)
-		this.game.loose();
+		{
+		this.vitesse=0;
+		//this.game.loose();
+		}
 	else
 		{
 		var hit=0, newHit=0;
