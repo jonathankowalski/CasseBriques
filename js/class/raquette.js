@@ -12,15 +12,16 @@ function Raquette(game){
 }
 
 Raquette.prototype.move = function(e){
-	var x=e.pageX;
+	var x=e.pageX-(this.width/2);
 	if(x!=this.x)
 		{
-		maxX = this.game.width - this.width - 10;
-		if(x < maxX){
+		maxX = this.game.width - this.width;
+		 if(x<=0)
+			this.x=0;
+		else if(x < maxX)
 			this.x = x;
-		} else {
-			this.x = maxX
-		}
+		else
+			this.x = maxX;
 		this.game.context.clearRect(0, this.y, this.game.width, this.game.height)
 		this.draw();
 		}
@@ -28,7 +29,7 @@ Raquette.prototype.move = function(e){
 		{
 		this.game.ball.remove();
 		this.game.ball.x=this.x+this.width/2;
-		this.game.ball.y=this.y-this.height-this.game.ball.r/2;
+		this.game.ball.y=this.y-this.height-(this.game.ball.r/2);
 		this.game.ball.draw();
 		}
 }

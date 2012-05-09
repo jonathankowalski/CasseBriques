@@ -98,11 +98,11 @@ Ball.prototype.move = function(angle){
 }
     
 Ball.prototype.inverseAngleY = function(deviation){
-    this.angle=2*Math.PI - this.angle -(deviation?deviation:0);
+    this.angle=(2*Math.PI - this.angle -(deviation?deviation:0))%(2*Math.PI);
 }
 
 Ball.prototype.inverseAngleX = function(){
-    this.angle=Math.PI - this.angle;
+    this.angle=(Math.PI - this.angle)%(2*Math.PI);
 }
 
 Ball.prototype.getNextX = function(){
