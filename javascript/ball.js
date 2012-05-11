@@ -18,7 +18,7 @@ var Ball=new Class({
 		this.game.context.clearRect(this.x-this.r, this.y-this.r, this.r*2, this.r*2);
 		},
 	start : function() {
-		this.speed=2*this.game.aspectRatio;
+		this.speed=1*this.game.aspectRatio;
 		},
 	move : function() {
 		var nextX=this.x + Math.cos(this.angle)*this.speed;
