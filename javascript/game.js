@@ -14,6 +14,8 @@ var Game=new Class({
 			{
 			element.appendChild(this.canvas);
 			this.context = this.canvas.getContext('2d');
+			this.bar= new Bar(this);
+			this.bar= new Ball(this);
 			}
 		else
 			{
