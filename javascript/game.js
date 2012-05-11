@@ -15,8 +15,8 @@ var Game=new Class({
 			element.appendChild(this.canvas);
 			this.context = this.canvas.getContext('2d');
 			this.bar= new Bar(this);
-			this.bar= new Ball(this);
-			this.timer=this.main.bind.delay(5, this);
+			this.ball= new Ball(this);
+			this.timer=this.main.delay(5, this);
 			}
 		else
 			{
@@ -26,8 +26,8 @@ var Game=new Class({
 	main : function() {
 		if(this.timer)
 			{
-			this.ball.draw();
-			this.timer=setTimeout(this.draw.bind(this), 20);
+			this.ball.move();
+			this.timer=this.main.delay(5, this);
 			}
 		},
 	destruct : function() {
