@@ -24,9 +24,36 @@ var Ball=new Class({
 		var nextX=this.x + Math.cos(this.angle)*this.speed;
 		var nextY=this.y + Math.sin(this.angle)*this.speed;
 		this.remove();
-		this.x=nextX;
-		this.y=nextY;
+		if(nextY >this.game.height)
+			{
+			this.speed=0;
+			}
+		else
+			{
+			if(nextX < 0 || nextX > this.game.width)     
+				{
+				this.inverseAngleX();
+				}
+			else
+				{
+				this.x=nextX;
+				}
+			if(nextY < 0)
+				{
+				this.inverseAngleY();
+				}
+			else
+				{
+				this.y=nextY;
+				}
+			}
 		this.draw();
+		},
+	inverseAngleX : function() {
+		this.angle=(Math.PI - this.angle)%(2*Math.PI);
+		},
+	inverseAngleY : function(deviation) {
+   		this.angle=(2*Math.PI - this.angle -(deviation?deviation:0))%(2*Math.PI);
 		},
 	destruct : function() {
 		}
