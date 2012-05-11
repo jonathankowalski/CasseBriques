@@ -10,7 +10,8 @@ var Brick=new Class({
 		this.game.context.fillRect(this.x, this.y, this.width, this.height);
 		},
 	remove : function() {
-		this.game.context.clearRect(0, this.y, this.game.width, this.game.height);
+		this.game.context.clearRect(this.x, this.y, this.width, this.height);
+		this.game.bricks.splice(this.game.bricks.indexOf(this),1);
 		},
 	move : function(e) {
 		var x=e.page.x-this.game.canvas.getPosition().x-(this.width/2);

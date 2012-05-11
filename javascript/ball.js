@@ -30,36 +30,57 @@ var Ball=new Class({
 			}
 		else
 			{
-			if(nextX < 0 || nextX > this.game.width)     
+			var hit=0, newHit=0;
+			for(var i=this.game.bricks.length-1; i>=0; i--)
+				{
+				newHit=this.game.bricks[i].hit(nextX,nextY,this.r);
+				if(newHit&&!this.game.bricks[i].remove())
+					{
+					i--;
+					hit=hit|newHit;
+					}
+				}
+			if(hit&1||hit&2)
 				{
 				this.inverseAngleX();
 				}
-			else
-				{
-				this.x=nextX;
-				}
-			if(nextY < 0)
+			if(hit&4||hit&8)
 				{
 				this.inverseAngleY();
 				}
-			else if(nextX+this.r/2>this.game.bar.x
-				&&nextX-this.r/2<this.game.bar.x+this.game.bar.width
-				&&nextY+this.r/2>this.game.bar.y
-				&&nextY<this.game.bar.y+(this.game.bar.height/2))
+			if(!hit)
 				{
-				this.inverseAngleY((((nextY-this.game.bar.x-(this.game.bar.width/2))/(this.game.bar.width/2))/2)*-(Math.PI/5));
-				if(this.angle<9*Math.PI/8&&this.angle>4*Math.PI/8)
+				if(nextX < 0 || nextX > this.game.width)     
 					{
-					this.angle=9*Math.PI/8;
+					this.inverseAngleX();
 					}
-				else if(this.angle>15*Math.PI/8)
+				else
 					{
-					this.angle=15*Math.PI/4;
+					this.x=nextX;
 					}
-				}
-			else
-				{
-				this.y=nextY;
+				if(nextY < 0)
+					{
+					this.inverseAngleY();
+					}
+				else if(nextX+this.r/2>this.game.bar.x
+					&&nextX-this.r/2<this.game.bar.x+this.game.bar.width
+					&&nextY+this.r/2>this.game.bar.y
+					&&nextY<this.game.bar.y+(this.game.bar.height/2))
+					{
+					this.inverseAngleY((((nextY-this.game.bar.x-(this.game.bar.width/2))/(this.game.bar.width/2))/2)*-(Math.PI/5));
+					if(this.angle<9*Math.PI/8&&this.angle>4*Math.PI/8)
+						{
+						this.angle=9*Math.PI/8;
+						}
+					else if(this.angle>15*Math.PI/8)
+						{
+						this.angle=15*Math.PI/4;
+						}
+					}
+				else
+					{
+					this.y=nextY;
+					}
 				}
 			}
 		this.draw();
