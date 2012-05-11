@@ -4,7 +4,7 @@
  */
 function Ball(game){
     this.game = game;
-    this.r = 5;
+    this.r = 5*this.game.aspectRatio;
     this.x =(this.game.width/2)-(this.r/2);
     this.y = this.game.height-this.game.raq.height-(this.r*2)-10;
     this.vitesse = 0;
@@ -14,7 +14,7 @@ function Ball(game){
 }
 
 Ball.prototype.start = function(){
-	this.vitesse=6;
+	this.vitesse=4*this.game.aspectRatio;
 }
 
 Ball.prototype.draw = function(){

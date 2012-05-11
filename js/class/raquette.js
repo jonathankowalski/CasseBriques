@@ -4,7 +4,7 @@
  */
 function Raquette(game){
     this.game = game;
-    this.width = 60; this.height = 10; this.yMargin = 10;
+    this.width = 60*this.game.aspectRatio; this.height = 10*this.game.aspectRatio; this.yMargin = 10*this.game.aspectRatio;
     this.y = this.game.height-this.height-this.yMargin;
     this.x = (this.game.width/2)-(this.width/2);
 	this.draw();
@@ -12,7 +12,7 @@ function Raquette(game){
 }
 
 Raquette.prototype.move = function(e){
-	var x=e.pageX-(this.width/2);
+	var x=e.pageX-$(this.game.canvas).offset().left-(this.width/2);
 	if(x!=this.x)
 		{
 		maxX = this.game.width - this.width;

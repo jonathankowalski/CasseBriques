@@ -9,9 +9,8 @@ function Game(parent){
 	this.height=$(parent).height();
 	this.canvas.width=this.width;
 	this.canvas.height=this.height;
-	this.canvas.style.height='100%';
-	this.canvas.style.width='100%';
-	this.canvas.style.border='1px solid #000';
+	if(this.height>480)
+		this.aspectRatio=2;
 	while(parent.childNodes[0])
 		parent.removeChild(parent.childNodes[0]);
 	if(this.canvas.getContext)
@@ -30,10 +29,10 @@ function Game(parent){
 }
 
 Game.prototype.populate = function() {
-	var bHeight=20, bWidth=60, bMargin=1,
-		bXDecal=Math.floor((this.width%(bWidth+bMargin))/2),
-		bYDecal=Math.floor(((this.height/2)%(bHeight+bMargin))/2),
-		gYMargin=30, gXMargin=30;
+	var bHeight=20*this.aspectRatio, bWidth=60*this.aspectRatio, bMargin=1*this.aspectRatio,
+		bXDecal=Math.floor((this.width%(bWidth+bMargin))/2)*this.aspectRatio,
+		bYDecal=Math.floor(((this.height/2)%(bHeight+bMargin))/2)*this.aspectRatio,
+		gYMargin=30*this.aspectRatio, gXMargin=30*this.aspectRatio;
 	this.bricks=new Array();
 	for(var i=0, j=Math.floor((this.width-(gXMargin*2))/(bWidth+bMargin)); i<j; i++)
 		{
