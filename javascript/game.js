@@ -16,10 +16,18 @@ var Game=new Class({
 			this.context = this.canvas.getContext('2d');
 			this.bar= new Bar(this);
 			this.bar= new Ball(this);
+			this.timer=this.main.bind.delay(5, this);
 			}
 		else
 			{
 			element.appendChild(document.createTextNode('Go buy a real browser !'));
+			}
+		},
+	main : function() {
+		if(this.timer)
+			{
+			this.ball.draw();
+			this.timer=setTimeout(this.draw.bind(this), 20);
 			}
 		},
 	destruct : function() {
