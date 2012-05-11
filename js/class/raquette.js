@@ -4,7 +4,7 @@
  */
 function Raquette(game){
     this.game = game;
-    this.width = 60*this.game.aspectRatio; this.height = 10*this.game.aspectRatio; this.yMargin = 10*this.game.aspectRatio;
+    this.width = 30*this.game.aspectRatio; this.height = 5*this.game.aspectRatio; this.yMargin = 5*this.game.aspectRatio;
     this.y = this.game.height-this.height-this.yMargin;
     this.x = (this.game.width/2)-(this.width/2);
 	this.draw();
