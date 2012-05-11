@@ -42,6 +42,21 @@ var Ball=new Class({
 				{
 				this.inverseAngleY();
 				}
+			else if(nextX+this.r/2>this.game.bar.x
+				&&nextX-this.r/2<this.game.bar.x+this.game.bar.width
+				&&nextY+this.r/2>this.game.bar.y
+				&&nextY<this.game.bar.y+(this.game.bar.height/2))
+				{
+				this.inverseAngleY((((nextY-this.game.bar.x-(this.game.bar.width/2))/(this.game.bar.width/2))/2)*-(Math.PI/5));
+				if(this.angle<9*Math.PI/8&&this.angle>4*Math.PI/8)
+					{
+					this.angle=9*Math.PI/8;
+					}
+				else if(this.angle>15*Math.PI/8)
+					{
+					this.angle=15*Math.PI/4;
+					}
+				}
 			else
 				{
 				this.y=nextY;
