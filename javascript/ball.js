@@ -7,7 +7,7 @@ var Ball=new Class({
 		this.speed = 0;
 		this.angle = 13*Math.PI/8;
 		this.draw();
-		this.start();
+		this.game.canvas.addEvent('click',this.start.bind(this));
 		},
 	draw : function() {
 		this.game.context.beginPath();
@@ -27,6 +27,7 @@ var Ball=new Class({
 		if(nextY >this.game.height)
 			{
 			this.speed=0;
+			this.inverseAngleY();
 			}
 		else
 			{
@@ -67,7 +68,7 @@ var Ball=new Class({
 					&&nextY+this.r/2>this.game.bar.y
 					&&nextY<this.game.bar.y+(this.game.bar.height/2))
 					{
-					this.inverseAngleY((((nextY-this.game.bar.x-(this.game.bar.width/2))/(this.game.bar.width/2))/2)*-(Math.PI/5));
+					this.inverseAngleY((((nextX-this.game.bar.x-(this.game.bar.width/2))/(this.game.bar.width/2))/2)*-(Math.PI/5));
 					if(this.angle<9*Math.PI/8&&this.angle>4*Math.PI/8)
 						{
 						this.angle=9*Math.PI/8;

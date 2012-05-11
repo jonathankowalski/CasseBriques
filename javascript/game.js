@@ -30,6 +30,11 @@ var Game=new Class({
 			this.ball.move();
 			this.timer=this.main.delay(5, this);
 			}
+		if(!this.bricks.length)
+			{
+			this.ball.speed=0;
+			this.populate();
+			}
 		},
 	populate : function() {
 		var bHeight=10*this.aspectRatio, bWidth=30*this.aspectRatio, bMargin=2,
