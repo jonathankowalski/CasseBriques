@@ -50,6 +50,8 @@ var Brick=new Class({
 		//this.game.context.fillText('s'+this.solidity, this.x, this.y, this.width);
 		},
 	remove : function() {
+		var snd = new Audio("sounds/88451__davidou__boing.ogg");
+		snd.play();
 		this.solidity--;
 		this.game.context.clearRect(this.x-1, this.y-1, this.width+2, this.height+2);
 		if(this.solidity)

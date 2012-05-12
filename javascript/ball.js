@@ -39,6 +39,8 @@ var Ball=new Class({
 		this.remove();
 		if(nextY >this.game.height)
 			{
+			var snd = new Audio("sounds/33675__pauliep83__crash.ogg");
+			snd.play();
 			this.speed=0;
 			this.inverseAngleY();
 			}
@@ -81,6 +83,8 @@ var Ball=new Class({
 					&&nextY+this.r/2>this.game.bar.y
 					&&nextY<this.game.bar.y+(this.game.bar.height/2))
 					{
+					var snd = new Audio("sounds/48939__itsallhappening__boing.ogg");
+					snd.play();
 					this.inverseAngleY((((nextX-this.game.bar.x-(this.game.bar.width/2))/(this.game.bar.width/2))/2)*-(Math.PI/5));
 					if(this.angle<9*Math.PI/8&&this.angle>4*Math.PI/8)
 						{

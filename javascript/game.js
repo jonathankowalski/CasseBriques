@@ -46,6 +46,8 @@ var Game=new Class({
 			}
 		if(!this.bricks.length)
 			{
+			var snd = new Audio("sounds/37215__simon-lacelle__ba-da-dum.ogg");
+			snd.play();
 			this.level++;
 			this.ball.speed=0;
 			this.bar.glueBall();
