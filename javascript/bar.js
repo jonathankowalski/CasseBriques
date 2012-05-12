@@ -42,12 +42,15 @@ var Bar=new Class({
 			this.draw();
 			if(!this.game.ball.speed)
 				{
-				this.game.ball.remove();
-				this.game.ball.x=this.x+this.width/2;
-				this.game.ball.y=this.y-this.height-(this.game.ball.r/2);
-				this.game.ball.draw();
+				this.glueBall();
 				}
 			}
+		},
+	glueBall : function() {
+			this.game.ball.remove();
+			this.game.ball.x=this.x+this.width/2;
+			this.game.ball.y=this.y-this.height-(this.game.ball.r/2);
+			this.game.ball.draw();
 		},
 	destruct : function() {
 		}

@@ -15,10 +15,12 @@ var Game=new Class({
 		// Creating canvas
 		this.canvas=document.createElement('canvas');
 		var size=element.getSize();
+		alert(size.x+','+size.y);
 		this.width=size.x;
 		this.height=size.y;
 		this.canvas.width=this.width;
 		this.canvas.height=this.height;
+		this.canvas.setStyle('display','block');
 		this.aspectRatio=this.height/200;
 		while(element.childNodes[0])
 			element.removeChild(element.childNodes[0]);
@@ -45,19 +47,20 @@ var Game=new Class({
 		if(!this.bricks.length)
 			{
 			this.ball.speed=0;
+			this.bar.glueBall();
 			this.populate();
 			}
 		},
 	populate : function() {
 		var bHeight=10*this.aspectRatio, bWidth=30*this.aspectRatio, bMargin=2,
-		bXDecal=Math.floor((this.width%(bWidth+bMargin))/2),
-		bYDecal=Math.floor(((this.height/2)%(bHeight+bMargin))/2),
-		gYMargin=5*this.aspectRatio, gXMargin=5*this.aspectRatio;
+			gXMargin=5*this.aspectRatio, gYMargin=5*this.aspectRatio;
+		bXDecal=Math.floor(((this.width-(gXMargin*2))%(bWidth+bMargin))/2),
+		bYDecal=Math.floor((((this.height/2)-(gYMargin*2))%(bHeight+bMargin))/2),
 		this.bricks=new Array();
 		for(var i=0, j=Math.floor((this.width-(gXMargin*2))/(bWidth+bMargin)); i<j; i++)
 			{
 			//this.bricks[i]=array(); Could improve hit test by checking lines hit first
-			for(var k=0, l=Math.floor((this.height/2)/(bHeight+bMargin)); k<l; k++)
+			for(var k=0, l=Math.floor(((this.height/2)-(gYMargin*2))/(bHeight+bMargin)); k<l; k++)
 				{
 				this.bricks.push(new Brick(this,gXMargin+bXDecal+i*bWidth+bMargin*(i-1),
 					gYMargin+bYDecal+k*bHeight+bMargin*(k-1),bWidth,bHeight));
