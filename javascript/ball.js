@@ -22,6 +22,7 @@ var Ball=new Class({
 		this.game.canvas.addEvent('click',this.start.bind(this));
 		},
 	draw : function() {
+		this.game.context.fillStyle = "#333";
 		this.game.context.beginPath();
 		this.game.context.arc(this.x,this.y,this.r-1,0,Math.PI*2,true);
 		this.game.context.fill();
@@ -30,7 +31,7 @@ var Ball=new Class({
 		this.game.context.clearRect(this.x-this.r, this.y-this.r, this.r*2, this.r*2);
 		},
 	start : function() {
-		this.speed=1*this.game.aspectRatio;
+		this.speed=(0.6+(this.game.level/10))*this.game.aspectRatio;
 		},
 	move : function() {
 		var nextX=this.x + Math.cos(this.angle)*this.speed;

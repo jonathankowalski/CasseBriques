@@ -22,6 +22,7 @@ var Bar=new Class({
 		this.game.canvas.addEvent('mousemove',this.move.bind(this));
 		},
 	draw : function() {
+		this.game.context.fillStyle = "#333";
 		this.game.context.fillRect(this.x, this.y, this.width, this.height);
 		},
 	remove : function() {
