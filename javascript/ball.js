@@ -66,21 +66,25 @@ var Ball=new Class({
 				}
 			if(!hit)
 				{
-				if(nextX < 0 || nextX > this.game.width)     
+				if(nextX< 0)
 					{
 					this.inverseAngleX();
+					nextX=this.r;
 					}
-				else
+				else if(nextX > this.game.width)
 					{
-					this.x=nextX;
+					this.inverseAngleX();
+					nextX=this.game.width-this.r;
 					}
+				this.x=nextX;
 				if(nextY < 0)
 					{
 					this.inverseAngleY();
+					nextY=this.r;
 					}
-				else if(nextX+this.r/2>this.game.bar.x
-					&&nextX-this.r/2<this.game.bar.x+this.game.bar.width
-					&&nextY+this.r/2>this.game.bar.y
+				else if(nextX+this.r>this.game.bar.x
+					&&nextX-this.r<this.game.bar.x+this.game.bar.width
+					&&nextY+this.r>this.game.bar.y
 					&&nextY<this.game.bar.y+(this.game.bar.height/2))
 					{
 					var snd = new Audio("sounds/48939__itsallhappening__boing.ogg");
@@ -94,11 +98,9 @@ var Ball=new Class({
 						{
 						this.angle=15*Math.PI/4;
 						}
+					nextY=this.game.bar.y-this.r;
 					}
-				else
-					{
-					this.y=nextY;
-					}
+				this.y=nextY;
 				}
 			}
 		this.draw();
