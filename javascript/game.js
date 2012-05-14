@@ -28,7 +28,7 @@ var Game=new Class({
 			element.appendChild(this.canvas);
 			this.context = this.canvas.getContext('2d');
 			this.bar= new Bar(this);
-			this.ball= new Ball(this);
+			this.balls= new Array(new Ball(this),new Ball(this),new Ball(this));
 			this.level=1;
 			this.populate();
 			this.timer=this.main.delay(30, this);
@@ -39,19 +39,22 @@ var Game=new Class({
 			}
 		},
 	main : function() {
-		if(this.timer)
-			{
-			this.ball.move();
-			this.timer=this.main.delay(5, this);
-			}
 		if(!this.bricks.length)
 			{
 			var snd = new Audio("sounds/37215__simon-lacelle__ba-da-dum.ogg");
 			snd.play();
 			this.level++;
-			this.ball.speed=0;
-			this.bar.glueBall();
+			for(var i=this.balls.length-1; i>=0; i--)
+				{
+				this.balls[i].speed=0;
+				}
 			this.populate();
+			}
+		if(this.timer)
+			{
+			for(var i=this.balls.length-1; i>=0; i--)
+				this.balls[i].move();
+			this.timer=this.main.delay(5, this);
 			}
 		},
 	populate : function() {

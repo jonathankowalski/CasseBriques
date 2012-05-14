@@ -41,17 +41,7 @@ var Bar=new Class({
 				this.x = maxX;
 			this.game.context.clearRect(0, this.y, this.game.width, this.game.height)
 			this.draw();
-			if(!this.game.ball.speed)
-				{
-				this.glueBall();
-				}
 			}
-		},
-	glueBall : function() {
-			this.game.ball.remove();
-			this.game.ball.x=this.x+this.width/2;
-			this.game.ball.y=this.y-this.height-(this.game.ball.r/2);
-			this.game.ball.draw();
 		},
 	destruct : function() {
 		}
