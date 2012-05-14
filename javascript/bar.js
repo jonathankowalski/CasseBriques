@@ -20,6 +20,7 @@ var Bar=new Class({
 		this.x = (this.game.width/2)-(this.width/2);
 		this.draw();
 		this.game.canvas.addEvent('mousemove',this.move.bind(this));
+		window.addEvent('keydown',this.fire.bind(this));
 		},
 	draw : function() {
 		this.game.context.fillStyle = "#333";
@@ -27,6 +28,12 @@ var Bar=new Class({
 		},
 	remove : function() {
 		this.game.context.clearRect(0, this.y, this.game.width, this.game.height);
+		},
+	fire : function(e) {
+		if(e.key=='space')
+			{
+			new window[(e.control?'LazerShot':'GunShot')](this.game, this.x+(this.width/2), this.y);
+			}
 		},
 	move : function(e) {
 		var x=e.page.x-this.game.canvas.getPosition().x-(this.width/2);

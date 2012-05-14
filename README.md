@@ -13,6 +13,8 @@ Sounds
 -------------
 * Simon Lacelle : http://www.freesound.org/people/Simon_Lacelle/sounds/37215/ - Creative Commons Atribution Licence
 * Davidou : http://www.freesound.org/people/davidou/sounds/88451/ -  Public domain
+* Supraliminal : http://www.freesound.org/people/Supraliminal/sounds/77087/ -  Public domain
+* Cognito perceptu : http://www.freesound.org/people/cognito%20perceptu/sounds/20352/ -  Public domain
 * Itsallhapening : http://www.freesound.org/people/itsallhappening/sounds/48939/ - Creative Commons Atribution Licence
 * FreqMan : http://www.freesound.org/people/FreqMan/sounds/43604 - Creative Commons Atribution Licence
 
