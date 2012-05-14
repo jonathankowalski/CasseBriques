@@ -61,15 +61,16 @@ var Brick=new Class({
 		},
 	hit : function(x,y,r) {
 		var hit=0;
-		if(x+(r/2)>this.x&&x-(r/2)<this.x+this.width&&y+(r/2)>this.y&&y-(r/2)<this.y+this.height)
+		if(x+r>this.x&&x-r<this.x+this.width
+			&&y+r>this.y&&y-r<this.y+this.height)
 			{
-			if(x>this.x+this.width-r&&x+r<this.x+this.width)
+			if(x>=this.x+this.width)
 				hit+=1 // hit on right
-			else if(x>this.x&&x<this.x+r)
+			else if(x<=this.x)
 				hit+=2 // hit on left
-			if(y>this.y&&y+r<this.y+this.height)
+			if(y>=this.y+this.height)
 				hit+=4; // hit on bottom
-			else
+			else if(y<=this.y)
 				hit+=8 // hit on top
 			}
 		return hit;
