@@ -17,11 +17,12 @@ var Ball=new Class({
 		this.x =(this.game.width/2)-(this.r/2);
 		this.y = this.game.height-this.game.bar.height-(this.r*2)-10;
 		this.speed = 0;
-		this.angle = 13*Math.PI/8;
+		this.angle = (9+Math.floor((Math.random()*6)+1))*Math.PI/8;
 		this.draw();
 		this.game.canvas.addEvent('click',this.start.bind(this));
 		},
 	draw : function() {
+		this.game.context.fillStyle = "#333";
 		this.game.context.beginPath();
 		this.game.context.arc(this.x,this.y,this.r-1,0,Math.PI*2,true);
 		this.game.context.fill();
@@ -29,72 +30,89 @@ var Ball=new Class({
 	remove : function() {
 		this.game.context.clearRect(this.x-this.r, this.y-this.r, this.r*2, this.r*2);
 		},
-	start : function() {
-		this.speed=1*this.game.aspectRatio;
+	start : function(e) {
+		if(!e.rightClick)
+			{
+			this.speed=(0.6+(this.game.level/10))*this.game.aspectRatio;
+			}
 		},
 	move : function() {
-		var nextX=this.x + Math.cos(this.angle)*this.speed;
-		var nextY=this.y + Math.sin(this.angle)*this.speed;
 		this.remove();
-		if(nextY >this.game.height)
+		if(this.speed)
 			{
-			this.speed=0;
-			this.inverseAngleY();
-			}
-		else
-			{
-			var hit=0, newHit=0;
-			for(var i=this.game.bricks.length-1; i>=0; i--)
+			var nextX=this.x + Math.cos(this.angle)*this.speed;
+			var nextY=this.y + Math.sin(this.angle)*this.speed;
+			if(nextY >this.game.height)
 				{
-				newHit=this.game.bricks[i].hit(nextX,nextY,this.r);
-				if(newHit&&!this.game.bricks[i].remove())
-					{
-					i--;
-					hit=hit|newHit;
-					}
-				}
-			if(hit&1||hit&2)
-				{
-				this.inverseAngleX();
-				}
-			if(hit&4||hit&8)
-				{
+				var snd = new Audio("sounds/33675__pauliep83__crash.ogg");
+				snd.play();
+				this.speed=0;
 				this.inverseAngleY();
 				}
-			if(!hit)
+			else
 				{
-				if(nextX < 0 || nextX > this.game.width)     
+				var hit=0, newHit=0;
+				for(var i=this.game.bricks.length-1; i>=0; i--)
+					{
+					newHit=this.game.bricks[i].hit(nextX,nextY,this.r);
+					if(newHit&&!this.game.bricks[i].remove())
+						{
+						i--;
+						hit=hit|newHit;
+						}
+					}
+				if(hit&1||hit&2)
 					{
 					this.inverseAngleX();
 					}
-				else
-					{
-					this.x=nextX;
-					}
-				if(nextY < 0)
+				if(hit&4||hit&8)
 					{
 					this.inverseAngleY();
 					}
-				else if(nextX+this.r/2>this.game.bar.x
-					&&nextX-this.r/2<this.game.bar.x+this.game.bar.width
-					&&nextY+this.r/2>this.game.bar.y
-					&&nextY<this.game.bar.y+(this.game.bar.height/2))
+				if(!hit)
 					{
-					this.inverseAngleY((((nextX-this.game.bar.x-(this.game.bar.width/2))/(this.game.bar.width/2))/2)*-(Math.PI/5));
-					if(this.angle<9*Math.PI/8&&this.angle>4*Math.PI/8)
+					if(nextX< 0)
 						{
-						this.angle=9*Math.PI/8;
+						this.inverseAngleX();
+						nextX=this.r;
 						}
-					else if(this.angle>15*Math.PI/8)
+					else if(nextX > this.game.width)
 						{
-						this.angle=15*Math.PI/4;
+						this.inverseAngleX();
+						nextX=this.game.width-this.r;
 						}
-					}
-				else
-					{
+					this.x=nextX;
+					if(nextY < 0)
+						{
+						this.inverseAngleY();
+						nextY=this.r;
+						}
+					else if(nextX+this.r>this.game.bar.x
+						&&nextX-this.r<this.game.bar.x+this.game.bar.width
+						&&nextY+this.r>this.game.bar.y
+						&&nextY<this.game.bar.y+(this.game.bar.height/2))
+						{
+						var snd = new Audio("sounds/48939__itsallhappening__boing.ogg");
+						snd.play();
+						this.inverseAngleY((((nextX-this.game.bar.x-(this.game.bar.width/2))/(this.game.bar.width/2))/2)*-(Math.PI/5));
+						if(this.angle<9*Math.PI/8&&this.angle>4*Math.PI/8)
+							{
+							this.angle=9*Math.PI/8;
+							}
+						else if(this.angle>15*Math.PI/8)
+							{
+							this.angle=15*Math.PI/4;
+							}
+						nextY=this.game.bar.y-this.r;
+						}
 					this.y=nextY;
 					}
 				}
+			}
+		else
+			{
+			this.x=this.game.bar.x+this.game.bar.width/2;
+			this.y=this.game.bar.y-this.game.bar.height-(this.r/2);
 			}
 		this.draw();
 		},

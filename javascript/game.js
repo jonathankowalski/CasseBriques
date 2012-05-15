@@ -15,7 +15,6 @@ var Game=new Class({
 		// Creating canvas
 		this.canvas=document.createElement('canvas');
 		var size=element.getSize();
-		alert(size.x+','+size.y);
 		this.width=size.x;
 		this.height=size.y;
 		this.canvas.width=this.width;
@@ -29,9 +28,10 @@ var Game=new Class({
 			element.appendChild(this.canvas);
 			this.context = this.canvas.getContext('2d');
 			this.bar= new Bar(this);
-			this.ball= new Ball(this);
+			this.balls= new Array(new Ball(this),new Ball(this),new Ball(this));
+			this.level=1;
 			this.populate();
-			this.timer=this.main.delay(5, this);
+			this.timer=this.main.delay(30, this);
 			}
 		else
 			{
@@ -39,21 +39,27 @@ var Game=new Class({
 			}
 		},
 	main : function() {
-		if(this.timer)
-			{
-			this.ball.move();
-			this.timer=this.main.delay(5, this);
-			}
 		if(!this.bricks.length)
 			{
-			this.ball.speed=0;
-			this.bar.glueBall();
+			var snd = new Audio("sounds/37215__simon-lacelle__ba-da-dum.ogg");
+			snd.play();
+			this.level++;
+			for(var i=this.balls.length-1; i>=0; i--)
+				{
+				this.balls[i].speed=0;
+				}
 			this.populate();
+			}
+		if(this.timer)
+			{
+			for(var i=this.balls.length-1; i>=0; i--)
+				this.balls[i].move();
+			this.timer=this.main.delay(5, this);
 			}
 		},
 	populate : function() {
 		var bHeight=10*this.aspectRatio, bWidth=30*this.aspectRatio, bMargin=2,
-			gXMargin=5*this.aspectRatio, gYMargin=5*this.aspectRatio;
+			gXMargin=10*this.aspectRatio, gYMargin=10*this.aspectRatio;
 		bXDecal=Math.floor(((this.width-(gXMargin*2))%(bWidth+bMargin))/2),
 		bYDecal=Math.floor((((this.height/2)-(gYMargin*2))%(bHeight+bMargin))/2),
 		this.bricks=new Array();

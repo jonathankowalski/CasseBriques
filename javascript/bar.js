@@ -20,12 +20,20 @@ var Bar=new Class({
 		this.x = (this.game.width/2)-(this.width/2);
 		this.draw();
 		this.game.canvas.addEvent('mousemove',this.move.bind(this));
+		window.addEvent('keydown',this.fire.bind(this));
 		},
 	draw : function() {
+		this.game.context.fillStyle = "#333";
 		this.game.context.fillRect(this.x, this.y, this.width, this.height);
 		},
 	remove : function() {
 		this.game.context.clearRect(0, this.y, this.game.width, this.game.height);
+		},
+	fire : function(e) {
+		if(e.key=='space')
+			{
+			new window[(e.control?'LazerShot':'GunShot')](this.game, this.x+(this.width/2), this.y);
+			}
 		},
 	move : function(e) {
 		var x=e.page.x-this.game.canvas.getPosition().x-(this.width/2);
@@ -40,17 +48,7 @@ var Bar=new Class({
 				this.x = maxX;
 			this.game.context.clearRect(0, this.y, this.game.width, this.game.height)
 			this.draw();
-			if(!this.game.ball.speed)
-				{
-				this.glueBall();
-				}
 			}
-		},
-	glueBall : function() {
-			this.game.ball.remove();
-			this.game.ball.x=this.x+this.width/2;
-			this.game.ball.y=this.y-this.height-(this.game.ball.r/2);
-			this.game.ball.draw();
 		},
 	destruct : function() {
 		}
